@@ -14,7 +14,13 @@ It has the following features
 - Login
 - Product CRUD for multiple users
 Every user has their unique products in their accounts.
-Registration system is based on Laravel Jetstream
+Registration system is based on Laravel **[Jetstream](https://jetstream.laravel.com/1.x/introduction.html)**
+
+## How to use
+- Run ** composer install ** after cloning the repository to install all dependencies
+- Next setup your database connection in .env file and do a database migration
+- Create an account and test
+- ** Good Luck **
 
 ## About Laravel
 
