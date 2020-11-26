@@ -19,8 +19,9 @@ class CreateProductsTable extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->double('price');
+            $table->string('image')->nullable();
             $table->string('currency')->default('XAF');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

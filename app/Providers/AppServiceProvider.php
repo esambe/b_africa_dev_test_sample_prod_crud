@@ -28,6 +28,6 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
-        View::composer(['dashboard'], ProductsComposer::class);
+        View::composer(['dashboard','welcome'], ProductsComposer::class);
     }
 }

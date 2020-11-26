@@ -60,7 +60,12 @@
                                 @endphp
                                 <tr>
                                     <td>{{ $i }}</td>
-                                    <td>{{ $prod->title }}</td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <img src="{{ asset('thumbnail/'.$prod->image) }}" alt="image" class="rounded-circle mr-2" height="50" width="50">
+                                            {{ $prod->title }}
+                                        </div>
+                                    </td>
                                     <td>{{ $prod->vendor->name }}</td>
                                     <td>{{ $prod->price }} {{ $prod->currency }}</td>
                                     <td>
@@ -70,14 +75,14 @@
                                 </tr>
                                 <div class="modal fade" id="edit{{ $prod->id }}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
-                                      <div class="modal-content">
+                                        <div class="modal-content">
                                         <div class="modal-header">
-                                          <h5 class="modal-title" id="editLabel{{ $prod->id }}">{{ $prod->title }}</h5>
-                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                          </button>
+                                            <h5 class="modal-title" id="editLabel{{ $prod->id }}">{{ $prod->title }}</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
                                         </div>
-                                        <form action="{{ route('update.prod', $prod->id) }}" method="post">
+                                        <form action="{{ route('update.prod', $prod->id) }}" method="post" enctype="multipart/form-data">
                                             @csrf
                                             <div class="modal-body">
                                                 <input type="hidden" name="vendor_id" value="{{ Auth::user()->id }}">
@@ -93,18 +98,26 @@
                                                     <label for="description">Description</label>
                                                     <textarea name="description" class="form-control" placeholder="Product decription">{{ $prod->description }}</textarea>
                                                 </div>
+                                                <div class="form-group row">
+                                                    <div class="col-md-6">
+                                                        <img src="{{ asset('thumbnail/'.$prod->image) }}" alt="image" class="rounded" height="150" style="object-fit: cover">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <input type="file" name="image" class="dropify" data-provide="dropify" data-max-file-size="2M">
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="modal-footer">
-                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                              <button type="submit" class="btn btn-primary">Update</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Update</button>
                                             </div>
                                         </form>
-                                      </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="modal fade" id="delete-{{ $prod->id }}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
-                                      <div class="modal-content">
+                                        <div class="modal-content">
                                         <div class="modal-body">
                                             Are you sure you want to delete <strong class="text-danger">{{ $prod->title }}</strong> ?
                                         </div>
@@ -112,7 +125,7 @@
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
                                             <a href="{{ route('delete.prod', $prod->id) }}" class="btn btn-danger">Yes Delete</a>
                                         </div>
-                                      </div>
+                                        </div>
                                     </div>
                                 </div>
                             @endforeach
@@ -135,7 +148,7 @@
                 <span aria-hidden="true">&times;</span>
             </button>
             </div>
-            <form action="{{ route('save') }}" method="POST">
+            <form action="{{ route('save') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
                     <input type="hidden" name="vendor_id" value="{{ Auth::user()->id }}">
@@ -151,6 +164,9 @@
                         <label for="description">Description</label>
                         <textarea name="description" class="form-control" placeholder="Product decription"></textarea>
                     </div>
+                    <div class="form-group">
+                        <input type="file" name="image" class="dropify" data-provide="dropify" data-max-file-size="2M">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
@@ -158,6 +174,12 @@
                 </div>
             </form>
         </div>
-        </div>
     </div>
+</div>
+    @section('scripts')
+        <script src="{{ asset('/js/dropify.js') }}"></script>
+        <script>
+            $('.dropify').dropify();
+        </script>
+    @endsection
 </x-app-layout>

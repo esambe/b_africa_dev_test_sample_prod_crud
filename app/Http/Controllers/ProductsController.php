@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Image;
 
 class ProductsController extends Controller
 {
@@ -51,6 +52,20 @@ class ProductsController extends Controller
         ]);
 
         $prod = new Product;
+
+        if($request->file('image')) {
+
+            $originalImage  = $request->file('image');
+            $thumbnailImage = Image::make($originalImage);
+            $thumbnailPath  = public_path().'/thumbnail/';
+            $originalPath   = public_path().'/uploads/';
+            $thumbnailImage->save($originalPath.time().$originalImage->getClientOriginalName());
+
+            $thumbnailImage->resize(150,150);
+            $thumbnailImage->save($thumbnailPath.time().$originalImage->getClientOriginalName());
+
+            $prod->image   = time().$originalImage->getClientOriginalName();
+        }
         $prod->title = $request->title;
         $prod->vendor_id = $request->vendor_id;
         $prod->price = $request->price;
@@ -99,12 +114,28 @@ class ProductsController extends Controller
         ]);
 
         $prod = Product::find($id);
+
+        if($request->file('image')) {
+            $originalImage  = $request->file('image');
+            $thumbnailImage = Image::make($originalImage);
+            $thumbnailPath  = public_path().'/thumbnail/';
+            $originalPath   = public_path().'/uploads/';
+            $thumbnailImage->save($originalPath.time().$originalImage->getClientOriginalName());
+
+            $thumbnailImage->resize(150,150);
+            $thumbnailImage->save($thumbnailPath.time().$originalImage->getClientOriginalName());
+
+            $prod->image   = time().$originalImage->getClientOriginalName();
+        }
+
         $prod->title = $request->title;
         $prod->vendor_id = $request->vendor_id;
         $prod->price = $request->price;
         $prod->slug = Str::slug($request->title).'-'. time();
         $prod->description = $request->description;
         $prod->save();
+        $thumbnailImage->destroy();
+
         return back()->with('status', $prod->title .', updated successfully');
     }
 
