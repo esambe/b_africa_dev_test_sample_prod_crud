@@ -5,13 +5,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'Bridge Afica') }}</title>
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
         <link rel="stylesheet" href="{{ asset('/css/dropify.css') }}">
@@ -32,7 +33,7 @@
             <!-- Page Heading -->
             <header class="bg-white shadow">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
+                    {{-- {{ $header }} --}}
                 </div>
             </header>
 
@@ -45,6 +46,13 @@
         @stack('modals')
 
         @livewireScripts
-        @yield('scripts')
+        <footer>
+            <div class="container">
+                <div class="text-center">
+                    <small>&copy; 2021. Bridge Africa, All rights reserved</small>
+                </div>
+            </div>
+            @yield('scripts')
+        </footer>
     </body>
 </html>

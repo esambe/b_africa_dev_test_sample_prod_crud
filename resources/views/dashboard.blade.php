@@ -1,9 +1,9 @@
 <x-app-layout>
-    <x-slot name="header">
+    {{-- <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Dashboard') }}
         </h2>
-    </x-slot>
+    </x-slot> --}}
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -141,41 +141,41 @@
     <!-- Modal -->
     <div class="modal fade" id="addProduct" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="addProductLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title" id="addProductLabel">Add Product</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="addProductLabel">Add Product</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <form action="{{ route('save') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body">
+                        <input type="hidden" name="vendor_id" value="{{ Auth::user()->id }}">
+                        <div class="form-group">
+                            <label for="title">Title</label>
+                            <input type="text" name="title" class="form-control" placeholder="Product title">
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Price</label>
+                            <input type="number" name="price" class="form-control" placeholder="Product price">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea name="description" class="form-control" placeholder="Product decription"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input type="file" name="image" class="dropify" data-provide="dropify" data-max-file-size="2M">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
             </div>
-            <form action="{{ route('save') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="modal-body">
-                    <input type="hidden" name="vendor_id" value="{{ Auth::user()->id }}">
-                    <div class="form-group">
-                        <label for="title">Title</label>
-                        <input type="text" name="title" class="form-control" placeholder="Product title">
-                    </div>
-                    <div class="form-group">
-                        <label for="price">Price</label>
-                        <input type="number" name="price" class="form-control" placeholder="Product price">
-                    </div>
-                    <div class="form-group">
-                        <label for="description">Description</label>
-                        <textarea name="description" class="form-control" placeholder="Product decription"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <input type="file" name="image" class="dropify" data-provide="dropify" data-max-file-size="2M">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
-                    <button type="submit" class="btn btn-primary">Save</button>
-                </div>
-            </form>
         </div>
     </div>
-</div>
     @section('scripts')
         <script src="{{ asset('/js/dropify.js') }}"></script>
         <script>

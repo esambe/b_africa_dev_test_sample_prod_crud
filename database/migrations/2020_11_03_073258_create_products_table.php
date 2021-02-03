@@ -21,6 +21,10 @@ class CreateProductsTable extends Migration
             $table->double('price');
             $table->string('image')->nullable();
             $table->string('currency')->default('XAF');
+            $table->boolean('is_discount')->default(0);
+            $table->boolean('is_service')->default(0);
+            $table->boolean('in_stock')->default(0);
+            $table->boolean('is_published')->default(0);
             $table->text('description')->nullable();
             $table->timestamps();
         });

@@ -69,6 +69,10 @@ class ProductsController extends Controller
         $prod->title = $request->title;
         $prod->vendor_id = $request->vendor_id;
         $prod->price = $request->price;
+        $prod->is_published = $request->is_published ? 1 : 0;
+        $prod->is_discount = $request->is_discount ? 1 : 0;
+        $prod->is_service = $request->is_service ? 1 : 0;
+        $prod->in_stock = $request->in_stock ? 1 : 0;
         $prod->slug = Str::slug($request->title) .'-'. time();
         $prod->description = $request->description;
         $prod->save();
@@ -132,9 +136,13 @@ class ProductsController extends Controller
         $prod->vendor_id = $request->vendor_id;
         $prod->price = $request->price;
         $prod->slug = Str::slug($request->title).'-'. time();
+        $prod->is_published = $request->is_published ? 1 : 0;
+        $prod->is_discount = $request->is_discount ? 1 : 0;
+        $prod->is_service = $request->is_service ? 1 : 0;
+        $prod->in_stock = $request->in_stock ? 1 : 0;
         $prod->description = $request->description;
         $prod->save();
-        $thumbnailImage->destroy();
+        // $thumbnailImage->destroy();
 
         return back()->with('status', $prod->title .', updated successfully');
     }

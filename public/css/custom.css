@@ -1,0 +1,130 @@
+a {
+    text-decoration: none !important;
+}
+
+.hero-section {
+    height: 30vh;
+    background-color: #ccc;
+    margin-bottom: 20px;
+    margin-top: 15px;
+    position: relative;
+}
+
+.hero-section .img-grid {
+    width: 300px;
+    height: 30vh;
+}
+
+.hero-section img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.relative-widget {
+    position: absolute;
+    right: 30px;
+    bottom: 30px;
+}
+.avatar-img {
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+}
+
+.avatar-img img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+#custom-tab .nav-item {
+    border: 1px solid #efefef;
+    border-radius: 0;
+    color: #000;
+    font-weight: bold;
+    margin: 0 1px 0 1px;
+}
+
+.btn-brand {
+    background-color: #E75C18;
+    color: #ffffff;
+}
+
+.btn-bold-text {
+    font-weight: bold !important;
+}
+
+#custom-tab .nav-item:hover {
+    background-color: #E75C18;
+    border: 1px solid #E75C18;
+    color: #fff;
+}
+
+#custom-tab .nav-item.active {
+    background-color: #E75C18;
+    border: 1px solid #E75C18;
+    color: #fff;
+}
+
+.container-fluid-c {
+    width: 1500px;
+    min-width: 1500px;
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.top-hr {
+    margin: 0;
+}
+
+#custom-pill .nav-link {
+    font-weight: bold;
+    color: #000;
+    padding: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+#custom-pill .nav-link.active {
+    background-color: #ccc;
+    color: #000;
+}
+
+.color-brand {
+    color: #E75C18;
+}
+
+#search-btn {
+    background-color: transparent;
+    border: none;
+    color: #E75C18;
+    font-weight: bolder;
+}
+
+.search input.form-control {
+    border: none;
+}
+
+div.search {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#custom-nav {
+    background-color: #fff !important;
+    box-shadow: 1px 0 2px 1px rgba(0, 0, 0, 0.452);
+}
+
+.card .card-action {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+}
+
+.footer {
+    padding: 10px;
+    margin-top: 20px;
+}

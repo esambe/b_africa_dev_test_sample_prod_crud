@@ -10,9 +10,9 @@
 ## Laravel 8 Product CRUD
 It has the following features
 
-- Register
-- Login
-- Product CRUD for multiple users
+- Register appBaseUrl/register
+- Login appBaseUrl/login
+- Product CRUD for multiple users. Each user will see his or her product in their dashboard
 Every user has their unique products in their accounts.
 Registration system is based on Laravel **[Jetstream](https://jetstream.laravel.com/1.x/introduction.html)**
 
