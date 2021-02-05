@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Image;
+// use Image;
 
 class ProductsController extends Controller
 {
@@ -53,19 +53,32 @@ class ProductsController extends Controller
 
         $prod = new Product;
 
-        if($request->file('image')) {
+        // if ($request->file('image')) {
 
-            $originalImage  = $request->file('image');
-            $thumbnailImage = Image::make($originalImage);
-            $thumbnailPath  = public_path().'/thumbnail/';
-            $originalPath   = public_path().'/uploads/';
-            $thumbnailImage->save($originalPath.time().$originalImage->getClientOriginalName());
+        //     $originalImage  = $request->file('image');
+        //     $thumbnailImage = Image::make($originalImage);
+        //     $thumbnailPath  = public_path() . '/thumbnail/';
+        //     $originalPath   = public_path() . '/uploads/';
+        //     $thumbnailImage->save($originalPath . time() . $originalImage->getClientOriginalName());
 
-            $thumbnailImage->resize(150,150);
-            $thumbnailImage->save($thumbnailPath.time().$originalImage->getClientOriginalName());
+        //     $thumbnailImage->resize(150, 150);
+        //     $thumbnailImage->save($thumbnailPath . time() . $originalImage->getClientOriginalName());
 
-            $prod->image   = time().$originalImage->getClientOriginalName();
+        //     $prod->image   = time() . $originalImage->getClientOriginalName();
+        // }
+
+        if ($file   =   $request->file('image')) {
+
+            $name      =   time() . time() . '.' . $file->getClientOriginalExtension();
+
+            $target_path    =  public_path() . '/uploads/';
+            // $thumbnailImage = public_path() . '/thumbnail/';
+
+            if ($file->move($target_path, $name)) {
+                $prod->image = $name;
+            }
         }
+
         $prod->title = $request->title;
         $prod->vendor_id = $request->vendor_id;
         $prod->price = $request->price;
@@ -73,7 +86,7 @@ class ProductsController extends Controller
         $prod->is_discount = $request->is_discount ? 1 : 0;
         $prod->is_service = $request->is_service ? 1 : 0;
         $prod->in_stock = $request->in_stock ? 1 : 0;
-        $prod->slug = Str::slug($request->title) .'-'. time();
+        $prod->slug = Str::slug($request->title) . '-' . time();
         $prod->description = $request->description;
         $prod->save();
 
@@ -119,23 +132,35 @@ class ProductsController extends Controller
 
         $prod = Product::find($id);
 
-        if($request->file('image')) {
-            $originalImage  = $request->file('image');
-            $thumbnailImage = Image::make($originalImage);
-            $thumbnailPath  = public_path().'/thumbnail/';
-            $originalPath   = public_path().'/uploads/';
-            $thumbnailImage->save($originalPath.time().$originalImage->getClientOriginalName());
+        // if ($request->file('image')) {
+        //     $originalImage  = $request->file('image');
+        //     $thumbnailImage = Image::make($originalImage);
+        //     $thumbnailPath  = public_path() . '/thumbnail/';
+        //     $originalPath   = public_path() . '/uploads/';
+        //     $thumbnailImage->save($originalPath . time() . $originalImage->getClientOriginalName());
 
-            $thumbnailImage->resize(150,150);
-            $thumbnailImage->save($thumbnailPath.time().$originalImage->getClientOriginalName());
+        //     $thumbnailImage->resize(150, 150);
+        //     $thumbnailImage->save($thumbnailPath . time() . $originalImage->getClientOriginalName());
 
-            $prod->image   = time().$originalImage->getClientOriginalName();
+        //     $prod->image   = time() . $originalImage->getClientOriginalName();
+        // }
+
+        if ($file   =   $request->file('image')) {
+
+            $name      =   time() . time() . '.' . $file->getClientOriginalExtension();
+
+            $target_path    =  public_path() . '/uploads/';
+            // $thumbnailImage = public_path() . '/thumbnail/';
+
+            if ($file->move($target_path, $name)) {
+                $prod->image = $name;
+            }
         }
 
         $prod->title = $request->title;
         $prod->vendor_id = $request->vendor_id;
         $prod->price = $request->price;
-        $prod->slug = Str::slug($request->title).'-'. time();
+        $prod->slug = Str::slug($request->title) . '-' . time();
         $prod->is_published = $request->is_published ? 1 : 0;
         $prod->is_discount = $request->is_discount ? 1 : 0;
         $prod->is_service = $request->is_service ? 1 : 0;
@@ -144,7 +169,7 @@ class ProductsController extends Controller
         $prod->save();
         // $thumbnailImage->destroy();
 
-        return back()->with('status', $prod->title .', updated successfully');
+        return back()->with('status', $prod->title . ', updated successfully');
     }
 
     /**
