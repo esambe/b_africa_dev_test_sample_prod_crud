@@ -350,7 +350,7 @@
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-md-6">
-                                                    <img src="{{ asset('thumbnail/'.$prod->image) }}" alt="image" class="rounded" height="150" style="object-fit: cover">
+                                                    <img src="{{ asset('uploads/'.$prod->image) }}" alt="image" class="rounded" height="150" style="object-fit: cover">
                                                 </div>
                                                 <div class="col-md-6">
                                                     <input type="file" name="image" class="dropify" data-provide="dropify" data-max-file-size="2M">
